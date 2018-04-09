@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux';
 
 import Recipe from './recipe'
-import { addNameRecipe } from '../actions/'
+//import { addNameRecipe } from '../actions/'
 
 
 
@@ -11,6 +11,11 @@ class listRecipes extends React.Component {
    render() {
       return (
          <div>
+
+            <div onClick={this.clickAdd}>
+               click to me
+            </div>
+
             <table>
 
                <thead>
@@ -23,14 +28,11 @@ class listRecipes extends React.Component {
 
                <tbody>
 
-               {this.props.recipeInfo.map((item, key) => <Recipe name={item.name} key={key}/>)}
+               {this.props.recipeInfo.map((item, key) => <Recipe key={key} name={item.name} numberItem={key} />)}
                </tbody>
 
             </table>
 
-            <div onClick={this.clickAdd}>
-               click to me
-            </div>
          </div>
 
 
@@ -38,10 +40,11 @@ class listRecipes extends React.Component {
    }
 
    clickAdd = () => {
-      this.props.addNameFunction('lol');
-      this.props.addAuthorFunction('ghsrgsrg');
+      this.props.addRecipeFunction('lol');
    };
 }
+
+
 function mapStateToProps(state) {
    return {
       recipeInfo: state.recipeInfo,
@@ -50,7 +53,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
    return {
-      addNameFunction: name => dispatch(addNameRecipe(name))
+      addRecipeFunction: name => dispatch({
+         type: "ADD_RECIPE",
+         payload: name
+      })
    }
 }
 

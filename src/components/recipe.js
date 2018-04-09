@@ -1,4 +1,5 @@
 import React  from 'react';
+import { connect } from "react-redux";
 
 class recipe extends React.Component {
    constructor(props){
@@ -7,8 +8,6 @@ class recipe extends React.Component {
       this.state = {
          click: 0
       };
-
-      this.handClick = this.handClick.bind(this);
    }
 
    render() {
@@ -16,15 +15,25 @@ class recipe extends React.Component {
          <tr style={{cursor: "pointer"}}>
             <td> {this.props.name} - </td>
             <td>{this.state.click}</td>
-            <td onClick={this.handClick}>+</td>
+            <td onClick={ this.handClick }>+</td>
          </tr>
       );
    }
 
 
 
-   handClick = () => this.setState({ click: this.state.click + 1 });
+   handClick = () => this.props.removeRecipeFunction( this.props.numberItem );
 }
 
 
-export default recipe;
+
+function mapDispatchToProps(dispatch) {
+   return {
+      removeRecipeFunction: id => dispatch({
+         type: "REMOVE_RECIPE",
+         payload: id
+      }),
+   }
+}
+
+export default connect(null, mapDispatchToProps)(recipe);
