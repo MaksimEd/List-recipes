@@ -1,28 +1,30 @@
-import React  from 'react';
+import React, { PureComponent }  from 'react';
 import { connect } from "react-redux";
 
 class recipe extends React.Component {
-   constructor(props){
+   /*constructor(props){
       super(props);
 
-      this.state = {
-         click: 0
-      };
-   }
+   }*/
 
    render() {
       return (
          <tr style={{cursor: "pointer"}}>
-            <td> {this.props.name} - </td>
-            <td>{this.state.click}</td>
-            <td onClick={ this.handClick }>+</td>
+            <td>
+               {this.props.numberItem}
+            </td>
+            <td>
+               <input type="text" name="title" data-id={this.props.numberItem} value={this.props.name} onChange={this.handleChange.bind(this)} />
+            </td>
+            <td onClick={ this.handleClick }>+</td>
          </tr>
       );
    }
 
 
+   handleChange = (event) => this.props.EditRecipeFunction(event.target.dataset.id, event.target.value);
 
-   handClick = () => this.props.removeRecipeFunction( this.props.numberItem );
+   handleClick = () => this.props.removeRecipeFunction( this.props.numberItem );
 }
 
 
@@ -33,6 +35,11 @@ function mapDispatchToProps(dispatch) {
          type: "REMOVE_RECIPE",
          payload: id
       }),
+      EditRecipeFunction: (id, name) => dispatch({
+         type: "EDIT_RECIPE",
+         payload: id,
+         name: name
+      })
    }
 }
 

@@ -20,8 +20,8 @@ class listRecipes extends React.Component {
 
                <thead>
                <tr>
+                  <td>Номер</td>
                   <td>Заголовок</td>
-                  <td>Количество кликов</td>
                   <td>Удалить</td>
                </tr>
                </thead>
@@ -40,7 +40,7 @@ class listRecipes extends React.Component {
    }
 
    clickAdd = () => {
-      this.props.addRecipeFunction('lol');
+      this.props.addRecipeFunction('');
    };
 }
 
