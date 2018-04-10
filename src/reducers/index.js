@@ -3,13 +3,19 @@ import { combineReducers } from "redux";
 
 const initialState = [
    {
-      name: "test 1"
+      title: "test 1",
+      content: "lorem12",
+      price: ""
    },
    {
-      name: "test 2"
+      title: "test 2",
+      content: "lorem12",
+      price: ""
    },
    {
-      name: "test 3"
+      title: "test 3",
+      content: "lorem12",
+      price: ""
    }
 ];
 
@@ -19,7 +25,7 @@ const recipeInfo = (state = initialState, action) => {
    switch (action.type) {
 
       case "ADD_RECIPE":
-         return [{ name: action.payload }, ...state];//создаем новый масив
+         return [{ title: '', price: '', content: '' }, ...state];//создаем новый масив
 
       case "REMOVE_RECIPE":
          let newStateRemove = [...state];
@@ -28,8 +34,7 @@ const recipeInfo = (state = initialState, action) => {
 
       case "EDIT_RECIPE":
          let newStateEdit = [...state];
-         newStateEdit.splice(action.id, 1, action.payload );
-
+         newStateEdit[action.id][action.name] = action.payload;
          return newStateEdit;//создаем новый масив
 
       default:

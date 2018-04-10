@@ -14,7 +14,13 @@ class recipe extends React.Component {
                {this.props.numberItem}
             </td>
             <td>
-               <input type="text" name="title" data-id={this.props.numberItem} value={this.props.name} onChange={this.handleChange.bind(this)} />
+               <input type="text" name="title" data-id={this.props.numberItem} value={this.props.title} onChange={this.handleChange.bind(this)} />
+            </td>
+            <td>
+               <textarea name="content" data-id={this.props.numberItem} value={this.props.content} cols="50" rows="2" onChange={this.handleChange.bind(this)} />
+            </td>
+            <td>
+               <input type="text" name="price" data-id={this.props.numberItem} value={this.props.price} onChange={this.handleChange.bind(this)} />
             </td>
             <td onClick={ this.handleClick }>+</td>
          </tr>
@@ -22,7 +28,7 @@ class recipe extends React.Component {
    }
 
 
-   handleChange = (event) => this.props.EditRecipeFunction(event.target.dataset.id, event.target.value);
+   handleChange = (event) => { this.props.EditRecipeFunction(event.target.dataset.id, event.target.name, event.target.value); };
 
    handleClick = () => this.props.removeRecipeFunction( this.props.numberItem );
 }
@@ -35,10 +41,11 @@ function mapDispatchToProps(dispatch) {
          type: "REMOVE_RECIPE",
          payload: id
       }),
-      EditRecipeFunction: (id, name) => dispatch({
+      EditRecipeFunction: (id, name, value) => dispatch({
          type: "EDIT_RECIPE",
          id: id,
-         payload: { name: name }
+         name: name,
+         payload: value
       })
    }
 }
