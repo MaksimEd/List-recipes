@@ -37,8 +37,8 @@ function mapDispatchToProps(dispatch) {
       }),
       EditRecipeFunction: (id, name) => dispatch({
          type: "EDIT_RECIPE",
-         payload: id,
-         name: name
+         id: id,
+         payload: { name: name }
       })
    }
 }

@@ -28,8 +28,8 @@ const recipeInfo = (state = initialState, action) => {
 
       case "EDIT_RECIPE":
          let newStateEdit = [...state];
-         newStateEdit.splice(action.payload, 1, {name: action.name });
-         console.log(newStateEdit);
+         newStateEdit.splice(action.id, 1, action.payload );
+
          return newStateEdit;//создаем новый масив
 
       default:
