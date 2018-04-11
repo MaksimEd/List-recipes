@@ -1,9 +1,6 @@
 import React  from 'react';
 import { connect } from 'react-redux';
 
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-
 import Recipe from './recipe'
 
 
@@ -14,14 +11,10 @@ class listRecipes extends React.Component {
 
    render() {
       return (
-         <DragDropContextProvider backend={HTML5Backend}>
             <div>
-
                <div onClick={this.clickAdd}>
                   click to me
                </div>
-
-               <div style={{ overflow: 'hidden', clear: 'both' }}>
 
                <table>
 
@@ -41,11 +34,8 @@ class listRecipes extends React.Component {
                   </tbody>
 
                </table>
-               </div>
 
             </div>
-         </DragDropContextProvider>
-
       );
    }
 
